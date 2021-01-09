@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from './styles.css'
 
 class Header extends React.Component {
     constructor(props) {
@@ -7,7 +8,9 @@ class Header extends React.Component {
 
     render() {
         return(
-            <div>Footer</div>
+            <div className={styles.headerContainer}>
+                <h2>Playlist Survey App thing</h2>
+            </div>
         )
     }
 }

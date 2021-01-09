@@ -1,4 +1,5 @@
 import React from 'react'
+import LoadingButton from './LoadingButton'
 
 class Body extends React.Component {
     constructor(props) {
@@ -7,7 +8,8 @@ class Body extends React.Component {
 
     render() {
         return(
-            <div>Body</div>
+            <div>
+            </div>
         )
     }
 }
