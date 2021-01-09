@@ -55,7 +55,7 @@ class SurveyModal extends React.Component {
     }
 
     goToSurvey() {
-        const newSurveyLink = process.env.REDIRECT_URI + '/#' + this.state.surveyId
+        const newSurveyLink = process.env.REDIRECT_URI + '/#surveyid=' + this.state.surveyId
         window.location = newSurveyLink
         window.location.reload()
     }
@@ -101,7 +101,7 @@ class SurveyModal extends React.Component {
             )
         }
 
-        const newSurveyLink = process.env.REDIRECT_URI + '/#' + surveyId
+        const newSurveyLink = process.env.REDIRECT_URI + '/#surveyid=' + surveyId
         return(
             <div className={styles.modalContainer}>
                 <div className={styles.modalWindow}>
