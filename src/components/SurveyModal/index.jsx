@@ -9,8 +9,8 @@ class SurveyModal extends React.Component {
     }
 
     async handleSpotifyAuth() {
-        const redirect = await getRedirectURI()
-        window.location = redirect
+        const redirectObj = await getRedirectURI()
+        window.location = redirectObj.authURL
     }
 
     render() {
