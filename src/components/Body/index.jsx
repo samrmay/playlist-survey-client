@@ -1,4 +1,7 @@
 import React from 'react'
+import SurveyFeed from './SurveyFeed'
+import SurveyPage from './SurveyPage'
+import styles from './styles.css'
 
 class Body extends React.Component {
     constructor(props) {
@@ -6,8 +9,12 @@ class Body extends React.Component {
     }
 
     render() {
+        const {surveyId} = this.props
         return(
-            <div>
+            <div className={styles.bodyContainer}>
+                {surveyId 
+                    ? <SurveyPage surveyId={surveyId}/> 
+                    : <SurveyFeed />}
             </div>
         )
     }
