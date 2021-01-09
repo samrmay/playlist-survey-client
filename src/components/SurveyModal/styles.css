@@ -18,9 +18,6 @@
   font-size: large;
   color: black;
 }
-.inputContainer {
-  padding: 20px;
-}
 .buttonContainer {
   display: flex;
   justify-content: space-between;

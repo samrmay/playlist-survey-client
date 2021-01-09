@@ -1,10 +1,7 @@
 import React from 'react'
-import LoadingButton from '../LoadingButton'
-import TextField from '../TextField'
-import PlaylistMenu from './PlaylistMenu'
 import LoginPrompt from './LoginPrompt'
+import CreateSurveyWindow from './CreateSurveyWindow'
 import {getUserInfo, getUserPlaylists, postSurvey} from '../../services/backend'
-import {getRedirectURI} from '../../services/backend'
 import styles from './styles.css'
 
 class SurveyModal extends React.Component {
@@ -35,11 +32,6 @@ class SurveyModal extends React.Component {
                 })
             }
         }
-    }
-
-    async handleSpotifyAuth() {
-        const redirectObj = await getRedirectURI()
-        window.location = redirectObj.authURL
     }
 
     handleChange(name, value) {
@@ -73,23 +65,13 @@ class SurveyModal extends React.Component {
             <div className={styles.modalContainer}>
                 <div className={styles.modalWindow}>
                     Survey Owner: {displayName}
-                    <div className={styles.inputContainer}>
-                        <TextField 
-                            name='surveyName' 
-                            value={surveyName}
-                            handleChange={this.handleChange}
-                            width='300px'
-                            placeholder='Survey name'/>
-                    </div>
-                    <PlaylistMenu 
+                    <CreateSurveyWindow 
                         playlists={playlists}
+                        surveyName={surveyName}
+                        goClicked={goClicked}
+                        selectedId={selectedId}
                         handleChange={this.handleChange}
-                        selectedId={selectedId} />
-                    <LoadingButton 
-                        content='create survey' 
-                        width='150px'
-                        handleClick={this.handleSurveyPost}
-                        wasClicked={goClicked}/>
+                        handleSurveyPost={this.handleSurveyPost}/>
                 </div>
             </div>
             )

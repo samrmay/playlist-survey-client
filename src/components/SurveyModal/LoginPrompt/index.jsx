@@ -1,10 +1,16 @@
 import React from 'react'
 import LoadingButton from '../../LoadingButton'
+import {getRedirectURI} from '../../../services/backend'
 import styles from './styles.css'
 
 class LoginPrompt extends React.Component {
     constructor(props) {
         super(props)
+    }
+
+    async handleSpotifyAuth() {
+        const redirectObj = await getRedirectURI()
+        window.location = redirectObj.authURL
     }
 
     render() {
