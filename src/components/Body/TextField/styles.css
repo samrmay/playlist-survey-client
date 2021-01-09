@@ -1,0 +1,45 @@
+.textFieldContainer {
+  border-radius: 4px;
+  position: relative;
+  transition: 0.3s all;
+  padding: 1px;
+  display: flex;
+}
+
+.textInputDark {
+  border-color: #b9ced0;
+  color: white;
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 5px;
+  background-color: transparent;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  resize: none;
+  font-family: sans-serif;
+}
+
+.textInputDark:focus {
+  border-color: #4dc4e4;
+  outline: none;
+}
+
+.textInputLight {
+  border-color: black;
+  color: black;
+  border-width: 3px;
+  border-style: solid;
+  border-radius: 5px;
+  background-color: transparent;
+  width: 100%;
+  padding-left: 10px;
+  padding-right: 10px;
+  resize: none;
+  font-family: sans-serif;
+}
+
+.textInputLight:focus {
+  border-color: #1ea3c8;
+  outline: none;
+}

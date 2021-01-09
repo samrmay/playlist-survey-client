@@ -1,0 +1,27 @@
+.loadingButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  margin: 5px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.loadingButtonBlack {
+  background-color: black;
+  transition: color 0.2s;
+  color: white;
+}
+.loadingButtonBlack:hover {
+  color: #4dc4e4;
+}
+
+.loadingButtonWhite {
+  background-color: white;
+  transition: background-color 0.2s;
+  color: black;
+}
+.loadingButtonWhite:hover {
+  background-color: #4dc4e4;
+}
