@@ -106,10 +106,11 @@ class SurveyModal extends React.Component {
             <div className={styles.modalContainer}>
                 <div className={styles.modalWindow}>
                     Survey Created! Share the link below with whomever! 
-                    The survey will also feature on the main feed.
+                    The survey will also feature on the main feed (eventually).
                     <br />
                     <br />
                     {newSurveyLink}
+                    <br />
                     <button onClick={this.goToSurvey}>go to survey</button>
                 </div>
             </div>
