@@ -13,11 +13,13 @@ class SurveyModal extends React.Component {
             userPlaylists: null,
             selectedId: null,
             goClicked: false,
-            surveyCreated: false
+            surveyCreated: false,
+            surveyId: null
         }
 
         this.handleChange = this.handleChange.bind(this)
         this.handleSurveyPost = this.handleSurveyPost.bind(this)
+        this.goToSurvey = this.goToSurvey.bind(this)
     }
 
     async componentDidMount() {
@@ -42,14 +44,33 @@ class SurveyModal extends React.Component {
         this.setState({goClicked: true})
         const {selectedId, surveyName} = this.state
         const {token} = this.props
-        await postSurvey(surveyName, selectedId, token)
-        this.setState({goClicked: false})
+        const response = await postSurvey(surveyName, selectedId, token)
+        if (response.survey) {
+            this.setState({
+                goClicked: false, 
+                surveyCreated: true,
+                surveyId: response.survey._id
+            })
+        }
+    }
+
+    goToSurvey() {
+        const newSurveyLink = process.env.REDIRECT_URI + '/#' + this.state.surveyId
+        window.location = newSurveyLink
+        window.location.reload()
     }
 
     render() {
         // Add close x in top left eventually
         const {token} = this.props
-        const {userPlaylists, userInfo, selectedId, surveyName, goClicked} = this.state
+        const {
+            userPlaylists, 
+            userInfo, 
+            selectedId, 
+            surveyName, 
+            goClicked,
+            surveyCreated,
+            surveyId} = this.state
 
         let displayName = 'loading...'
         let playlists = null
@@ -60,28 +81,36 @@ class SurveyModal extends React.Component {
             playlists = userPlaylists.items
         } catch{}
 
-        if (token) {
+        if (!surveyCreated) {
             return(
-            <div className={styles.modalContainer}>
-                <div className={styles.modalWindow}>
-                    Survey Owner: {displayName}
-                    <CreateSurveyWindow 
-                        playlists={playlists}
-                        surveyName={surveyName}
-                        goClicked={goClicked}
-                        selectedId={selectedId}
-                        handleChange={this.handleChange}
-                        handleSurveyPost={this.handleSurveyPost}/>
+                <div className={styles.modalContainer}>
+                    <div className={styles.modalWindow}>
+                        {token ? 
+                            <div>Survey Owner: {displayName}
+                                <CreateSurveyWindow 
+                                    playlists={playlists}
+                                    surveyName={surveyName}
+                                    goClicked={goClicked}
+                                    selectedId={selectedId}
+                                    handleChange={this.handleChange}
+                                    handleSurveyPost={this.handleSurveyPost}/>
+                            </div> 
+                        : <LoginPrompt />}
+                    </div>
                 </div>
-            </div>
             )
         }
-        
-        // If no token, show login window
+
+        const newSurveyLink = process.env.REDIRECT_URI + '/#' + surveyId
         return(
             <div className={styles.modalContainer}>
                 <div className={styles.modalWindow}>
-                    <LoginPrompt />
+                    Survey Created! Share the link below with whomever! 
+                    The survey will also feature on the main feed.
+                    <br />
+                    <br />
+                    {newSurveyLink}
+                    <button onClick={this.goToSurvey}>go to survey</button>
                 </div>
             </div>
         )
