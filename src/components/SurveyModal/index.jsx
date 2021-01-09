@@ -2,7 +2,7 @@ import React from 'react'
 import LoadingButton from '../LoadingButton'
 import TextField from '../TextField'
 import PlaylistMenu from './PlaylistMenu'
-import {getUserInfo, getUserPlaylists} from '../../services/backend'
+import {getUserInfo, getUserPlaylists, postSurvey} from '../../services/backend'
 import {getRedirectURI} from '../../services/backend'
 import styles from './styles.css'
 
@@ -13,7 +13,12 @@ class SurveyModal extends React.Component {
             surveyName: '',
             userInfo: null,
             userPlaylists: null,
+            selectedId: null,
+            goClicked: false
         }
+
+        this.handleChange = this.handleChange.bind(this)
+        this.handleSurveyPost = this.handleSurveyPost.bind(this)
     }
 
     async componentDidMount() {
@@ -35,10 +40,22 @@ class SurveyModal extends React.Component {
         window.location = redirectObj.authURL
     }
 
+    handleChange(name, value) {
+        this.setState({[name]: value})
+    }
+
+    async handleSurveyPost() {
+        this.setState({goClicked: true})
+        const {selectedId, surveyName} = this.state
+        const {token} = this.props
+        await postSurvey(surveyName, selectedId, token)
+        this.setState({goClicked: false})
+    }
+
     render() {
         // Add close x in top left eventually
         const {token} = this.props
-        const {userPlaylists, userInfo} = this.state
+        const {userPlaylists, userInfo, selectedId, surveyName, goClicked} = this.state
 
         let displayName = 'loading...'
         let playlists = null
@@ -51,14 +68,31 @@ class SurveyModal extends React.Component {
 
         if (token) {
             return(
-                <div className={styles.modalContainer}>
+            <div className={styles.modalContainer}>
                 <div className={styles.modalWindow}>
                     Survey Owner: {displayName}
-                    <PlaylistMenu playlists={playlists} border={true}/>
+                    <div className={styles.inputContainer}>
+                        <TextField 
+                            name='surveyName' 
+                            value={surveyName}
+                            handleChange={this.handleChange}
+                            width='300px'/>
+                    </div>
+                    <PlaylistMenu 
+                        playlists={playlists}
+                        handleChange={this.handleChange}
+                        selectedId={selectedId} />
+                    <LoadingButton 
+                        content='create survey' 
+                        width='150px'
+                        handleClick={this.handleSurveyPost}
+                        wasClicked={goClicked}/>
                 </div>
             </div>
             )
         }
+        
+        // If no token, show login window
         return(
             <div className={styles.modalContainer}>
                 <div className={styles.modalWindow}>

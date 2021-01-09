@@ -3,6 +3,11 @@
   padding: 5px;
   color: white;
   font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.playlistItem:hover {
+  background-color: #666666;
 }
 .border {
   border-color: #737373;

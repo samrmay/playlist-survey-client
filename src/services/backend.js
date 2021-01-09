@@ -34,7 +34,10 @@ export function getSurveyById(id) {
 export function postSurvey(name, playlistId, userAccessToken) {
   const body = { name, playlistId, userAccessToken };
   return fetch(process.env.API_URL + "survey", {
-    method: "GET",
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
     body: JSON.stringify(body),
   }).then((response) => response.json());
 }
