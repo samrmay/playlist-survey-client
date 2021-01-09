@@ -9,9 +9,19 @@ class App extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            showSurveyModal: false
+            showSurveyModal: false,
+            userAccessToken: null
         }
         this.handleChange = this.handleChange.bind(this)
+    }
+
+    componentDidMount() {
+        if (window.location.hash) {
+            const matchObj = window.location.hash.match(/access_token=(.+)&token_type/)
+            if (matchObj[1]) {
+                this.setState({userAccessToken: matchObj[1], showSurveyModal: true})
+            }
+        }
     }
 
     handleChange(name, value) {
@@ -19,10 +29,10 @@ class App extends React.Component {
     }
 
     render() {
-        const {showSurveyModal} = this.state
+        const {showSurveyModal, userAccessToken} = this.state
         return(
             <div className={styles.root}>
-                {showSurveyModal ? <SurveyModal /> : null}
+                {showSurveyModal ? <SurveyModal token={userAccessToken}/> : null}
                 <div>
                     <Header handleChange={this.handleChange}/>
                     <Body />

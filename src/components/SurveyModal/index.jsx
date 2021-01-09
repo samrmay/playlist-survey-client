@@ -1,11 +1,16 @@
 import React from 'react'
 import LoadingButton from '../LoadingButton'
+import TextField from '../TextField'
 import {getRedirectURI} from '../../services/backend'
 import styles from './styles.css'
 
 class SurveyModal extends React.Component {
     constructor(props) {
         super(props)
+        this.state = {
+            surveyName: '',
+            userPlaylists: null,
+        }
     }
 
     async handleSpotifyAuth() {
@@ -14,6 +19,17 @@ class SurveyModal extends React.Component {
     }
 
     render() {
+        // Add close x in top left eventually
+        const {token} = this.props
+        if (token) {
+            return(
+                <div className={styles.modalContainer}>
+                <div className={styles.modalWindow}>
+                    Create survey here
+                </div>
+            </div>
+            )
+        }
         return(
             <div className={styles.modalContainer}>
                 <div className={styles.modalWindow}>
