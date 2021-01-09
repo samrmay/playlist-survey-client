@@ -1,5 +1,4 @@
 import React from 'react'
-import LoadingButton from './LoadingButton'
 
 class Body extends React.Component {
     constructor(props) {

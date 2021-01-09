@@ -1,5 +1,5 @@
 import React from 'react';
-import Loading from '../../../assets/loading.svg';
+import Loading from '../../assets/loading.svg';
 import styles from './styles.css';
 
 class LoadingButton extends React.Component {
