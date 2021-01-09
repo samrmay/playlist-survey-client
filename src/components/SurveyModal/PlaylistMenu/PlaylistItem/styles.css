@@ -1,0 +1,10 @@
+.playlistItem {
+  background-color: #262626;
+  padding: 5px;
+  color: white;
+  font-size: 16px;
+}
+.border {
+  border-color: #737373;
+  margin: 0px 5px;
+}

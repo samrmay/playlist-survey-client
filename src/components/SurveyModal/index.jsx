@@ -1,6 +1,7 @@
 import React from 'react'
 import LoadingButton from '../LoadingButton'
 import TextField from '../TextField'
+import PlaylistMenu from './PlaylistMenu'
 import {getUserInfo, getUserPlaylists} from '../../services/backend'
 import {getRedirectURI} from '../../services/backend'
 import styles from './styles.css'
@@ -21,7 +22,10 @@ class SurveyModal extends React.Component {
             const userInfo = await getUserInfo(token)
             const userPlaylists = await getUserPlaylists(token)
             if (!userInfo.error && !userPlaylists.error) {
-                this.setState({userInfo, userPlaylists})
+                this.setState({
+                    userInfo: userInfo.info, 
+                    userPlaylists: userPlaylists.playlists
+                })
             }
         }
     }
@@ -34,11 +38,23 @@ class SurveyModal extends React.Component {
     render() {
         // Add close x in top left eventually
         const {token} = this.props
+        const {userPlaylists, userInfo} = this.state
+
+        let displayName = 'loading...'
+        let playlists = null
+        try {
+            displayName = userInfo.display_name
+        } catch {}
+        try {
+            playlists = userPlaylists.items
+        } catch{}
+
         if (token) {
             return(
                 <div className={styles.modalContainer}>
                 <div className={styles.modalWindow}>
-                    Create survey here
+                    Survey Owner: {displayName}
+                    <PlaylistMenu playlists={playlists} border={true}/>
                 </div>
             </div>
             )

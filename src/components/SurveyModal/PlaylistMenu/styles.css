@@ -1,0 +1,6 @@
+.playlistMenu {
+  background-color: lightblue;
+  padding: 10px;
+  overflow: auto;
+  max-height: 400px;
+}
