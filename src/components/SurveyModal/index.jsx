@@ -2,6 +2,7 @@ import React from 'react'
 import LoadingButton from '../LoadingButton'
 import TextField from '../TextField'
 import PlaylistMenu from './PlaylistMenu'
+import LoginPrompt from './LoginPrompt'
 import {getUserInfo, getUserPlaylists, postSurvey} from '../../services/backend'
 import {getRedirectURI} from '../../services/backend'
 import styles from './styles.css'
@@ -14,7 +15,8 @@ class SurveyModal extends React.Component {
             userInfo: null,
             userPlaylists: null,
             selectedId: null,
-            goClicked: false
+            goClicked: false,
+            surveyCreated: false
         }
 
         this.handleChange = this.handleChange.bind(this)
@@ -76,7 +78,8 @@ class SurveyModal extends React.Component {
                             name='surveyName' 
                             value={surveyName}
                             handleChange={this.handleChange}
-                            width='300px'/>
+                            width='300px'
+                            placeholder='Survey name'/>
                     </div>
                     <PlaylistMenu 
                         playlists={playlists}
@@ -96,9 +99,7 @@ class SurveyModal extends React.Component {
         return(
             <div className={styles.modalContainer}>
                 <div className={styles.modalWindow}>
-                    We need to log in to Spotify to create a playlist survey. Log in. or don't. 
-                    Not like I care.
-                    <LoadingButton handleClick={this.handleSpotifyAuth} content='log in'/>
+                    <LoginPrompt />
                 </div>
             </div>
         )
