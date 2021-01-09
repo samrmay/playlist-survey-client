@@ -1,6 +1,7 @@
 import React from 'react'
 import LoadingButton from '../LoadingButton'
 import TextField from '../TextField'
+import {getUserInfo, getUserPlaylists} from '../../services/backend'
 import {getRedirectURI} from '../../services/backend'
 import styles from './styles.css'
 
@@ -9,7 +10,19 @@ class SurveyModal extends React.Component {
         super(props)
         this.state = {
             surveyName: '',
+            userInfo: null,
             userPlaylists: null,
+        }
+    }
+
+    async componentDidMount() {
+        if (this.props.token) {
+            const {token} = this.props
+            const userInfo = await getUserInfo(token)
+            const userPlaylists = await getUserPlaylists(token)
+            if (!userInfo.error && !userPlaylists.error) {
+                this.setState({userInfo, userPlaylists})
+            }
         }
     }
 
