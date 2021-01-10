@@ -10,6 +10,8 @@ class SurveyPlaylist extends React.Component {
             playlist: null,
             tracks: []
         }
+
+        this.incrementIndex = this.incrementIndex.bind(this)
     }
 
     async componentDidMount() {
@@ -35,12 +37,24 @@ class SurveyPlaylist extends React.Component {
                             track={track} 
                             key={`${track.id}${Date.now()}${i}`} 
                             index={i} 
-                            border={i != (tracks.length-1)}/>
+                            border={i != (tracks.length-1)}
+                            incrementIndex={this.incrementIndex}/>
                     )
                 }
             }
         }
         return tracksEntryArr
+    }
+
+    incrementIndex(index, increment) {
+        this.setState(prevState => {
+            const tracks = prevState.tracks
+            const item = tracks[index]
+            const newIndex = parseInt(index)+parseInt(increment)
+            tracks.splice(index, 1)
+            tracks.splice(newIndex, 0, item)
+            return {tracks}
+        })
     }
 
     render() {
