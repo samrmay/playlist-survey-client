@@ -1,4 +1,5 @@
 import React from 'react'
+import SurveyPlaylist from './SurveyPlaylist'
 import {getSurveyById} from '../../../services/backend'
 import styles from './styles.css'
 
@@ -9,14 +10,25 @@ class SurveyPage extends React.Component {
     }
 
     async componentDidMount() {
-        const survey = await getSurveyById(this.props.surveyId)
-        console.log(survey)
-        this.setState({survey})
+        const response = await getSurveyById(this.props.surveyId)
+        if (response.survey)
+        this.setState({survey: response.survey})
     }
 
     render() {
+        const {survey} = this.state
+        if (!survey) {
+            return (
+                <div>loading...</div>
+            )
+        }
+        console.log(survey)
         return(
-            <div>Survey!</div>
+            <div>
+                <h3>{survey.name}</h3> 
+                <h5>by: {survey.owner}</h5>
+                <SurveyPlaylist playlist={survey.trackRankings}/>
+            </div>
         )
     }
 }

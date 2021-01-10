@@ -7,7 +7,9 @@ class SurveyFeed extends React.Component {
 
     render() {
         return(
-            <div>Survey feed!</div>
+            <div>Survey feed coming soon! Say goodbye to dumb links
+                that seemed like a good idea when I started.
+            </div>
         )
     }
 }
