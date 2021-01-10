@@ -16,20 +16,23 @@ class PlaylistMenu extends React.Component {
     }
 
     render() {
-        // CUrrently only displays 20 most recent
+        // Currently only displays 20 most recent (and only public)
         const {playlists, selectedId} = this.props
         let playlistItems = null
         if (playlists) {
             playlistItems = playlists.map((item, index) => {
-                return(
-                    <PlaylistItem 
-                        playlist={item} 
-                        handleSelect={this.handleSelect}
-                        key={index} 
-                        border={true}
-                        selected={item.id == selectedId}/>
-                )
+                if (item.public) {
+                    return(
+                        <PlaylistItem 
+                            playlist={item} 
+                            handleSelect={this.handleSelect}
+                            key={index} 
+                            border={true}
+                            selected={item.id == selectedId}/>
+                    )
+                }
             })
+            playlistItems = playlistItems.filter(item => item)
         }
         return(
             <div className={styles.playlistMenu}>

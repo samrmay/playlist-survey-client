@@ -4,7 +4,7 @@ class SurveyPlaylist extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            playlist: null
+            tracks: []
         }
     }
 

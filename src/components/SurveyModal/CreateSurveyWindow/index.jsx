@@ -22,6 +22,8 @@ class CreateSurveyWindow extends React.Component {
                         width='300px'
                         placeholder='Survey name'/>
                 </div>
+                Don't see your playlist? Make it public!
+                    Only public playlists work right now.
                 <PlaylistMenu 
                     playlists={playlists}
                     handleChange={this.props.handleChange}

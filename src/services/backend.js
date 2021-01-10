@@ -47,3 +47,9 @@ export function deleteSurvey(id) {
     method: "DELETE",
   }).then((response) => response.json());
 }
+
+export function getTrackById(id) {
+  return fetch(process.env.API_URL + "spotify/tracks/" + id, {
+    method: "GET",
+  }).then((response) => response.json());
+}
