@@ -53,3 +53,15 @@ export function getTrackById(id) {
     method: "GET",
   }).then((response) => response.json());
 }
+
+export function getPlaylistById(id) {
+  return fetch(process.env.API_URL + "spotify/playlist/" + id, {
+    method: "GET",
+  }).then((response) => response.json());
+}
+
+export function getPlaylistTracks(id) {
+  return fetch(process.env.API_URL + "spotify/playlist/tracks/" + id, {
+    method: "GET",
+  }).then((response) => response.json());
+}

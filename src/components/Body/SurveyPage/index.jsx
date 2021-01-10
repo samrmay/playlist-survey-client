@@ -11,8 +11,9 @@ class SurveyPage extends React.Component {
 
     async componentDidMount() {
         const response = await getSurveyById(this.props.surveyId)
-        if (response.survey)
-        this.setState({survey: response.survey})
+        if (response.survey) {
+            this.setState({survey: response.survey})
+        }
     }
 
     render() {
@@ -22,12 +23,11 @@ class SurveyPage extends React.Component {
                 <div>loading...</div>
             )
         }
-        console.log(survey)
         return(
             <div>
                 <h3>{survey.name}</h3> 
                 <h5>by: {survey.owner}</h5>
-                <SurveyPlaylist playlist={survey.trackRankings}/>
+                <SurveyPlaylist playlistId={survey.playlistSpotifyId}/>
             </div>
         )
     }
