@@ -39,7 +39,7 @@ class App extends React.Component {
         const {showSurveyModal, userAccessToken, surveyId} = this.state
         return(
             <div className={styles.root}>
-                {showSurveyModal ? <SurveyModal token={userAccessToken}/> : null}
+                {showSurveyModal ? <SurveyModal token={userAccessToken} handleChange={this.handleChange}/> : null}
                 <div>
                     <Header handleChange={this.handleChange}/>
                     <Body surveyId={surveyId}/>

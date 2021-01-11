@@ -1,6 +1,7 @@
 import React from 'react'
 import LoginPrompt from './LoginPrompt'
 import CreateSurveyWindow from './CreateSurveyWindow'
+import CloseButton from './CloseButton'
 import {getUserInfo, getUserPlaylists, postSurvey} from '../../services/backend'
 import styles from './styles.css'
 
@@ -20,6 +21,7 @@ class SurveyModal extends React.Component {
         this.handleChange = this.handleChange.bind(this)
         this.handleSurveyPost = this.handleSurveyPost.bind(this)
         this.goToSurvey = this.goToSurvey.bind(this)
+        this.handleClose = this.handleClose.bind(this)
     }
 
     async componentDidMount() {
@@ -38,6 +40,10 @@ class SurveyModal extends React.Component {
 
     handleChange(name, value) {
         this.setState({[name]: value})
+    }
+
+    handleClose() {
+        this.props.handleChange('showSurveyModal', false)
     }
 
     async handleSurveyPost() {
@@ -61,7 +67,6 @@ class SurveyModal extends React.Component {
     }
 
     render() {
-        // Add close x in top left eventually
         const {token} = this.props
         const {
             userPlaylists, 
@@ -85,6 +90,7 @@ class SurveyModal extends React.Component {
             return(
                 <div className={styles.modalContainer}>
                     <div className={styles.modalWindow}>
+                        <div className={styles.closeContainer}><CloseButton handleClose={this.handleClose}/></div>
                         {token ? 
                             <div>Survey Owner: {displayName}
                                 <CreateSurveyWindow 

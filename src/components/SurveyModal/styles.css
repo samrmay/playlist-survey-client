@@ -18,6 +18,11 @@
   font-size: large;
   color: black;
 }
+.closeContainer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0px 0px 10px 0px;
+}
 .buttonContainer {
   display: flex;
   justify-content: space-between;
