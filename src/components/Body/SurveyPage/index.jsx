@@ -6,14 +6,29 @@ import styles from './styles.css'
 class SurveyPage extends React.Component {
     constructor(props) {
         super(props)
-        this.state = {survey: null}
+        this.state = {
+            survey: null,
+            points: []
+        }
     }
 
     async componentDidMount() {
         const response = await getSurveyById(this.props.surveyId)
         if (response.survey) {
-            this.setState({survey: response.survey})
+            const newPoints = this.state.points
+            for (let i in survey.trackRankings) {
+                newPoints.push(0)
+            }
+            this.setState({survey: response.survey, points: newPoints})
         }
+    }
+
+    updatePoints(i, points) {
+        this.setState(prevState => {
+            const newPoints = prevState.points
+            newPoints[i] = points
+            return {points: newPoints}
+        })
     }
 
     render() {
