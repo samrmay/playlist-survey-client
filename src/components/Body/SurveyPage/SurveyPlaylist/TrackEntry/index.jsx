@@ -43,6 +43,7 @@ class TrackEntry extends React.Component {
                     <div className={styles.artistsString}>
                         {artistsString}
                     </div>
+                    <input type='range'></input>
                 </div>
             </div>
             {border ? <hr className={styles.border}/> : null}
