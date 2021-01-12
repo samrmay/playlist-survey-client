@@ -5,6 +5,15 @@ import styles from './styles.css'
 class TrackEntry extends React.Component {
     constructor(props) {
         super(props)
+        this.state = {
+            localPoints: 0
+        }
+        this.handleMouseUp = this.handleMouseUp.bind(this)
+        this.handlePointsChange = this.handlePointsChange.bind(this)
+    }
+
+    componentDidMount() {
+        this.setState({localPoints: this.props.points})
     }
 
     stringifyArtists(artists) {
@@ -18,8 +27,17 @@ class TrackEntry extends React.Component {
         return result
     }
 
+    handlePointsChange(e) {
+        this.setState({localPoints: e.target.value})
+    }
+
+    handleMouseUp(e) {
+        const {name, value} = e.target
+        this.props.updatePoints(name, value)
+    }
+
     render() {
-        const {track, border} = this.props
+        const {track, border, index, rank} = this.props
         const {name, artists, album} = track
 
         let albumImage = <Loading alt='loading'/>
@@ -43,7 +61,16 @@ class TrackEntry extends React.Component {
                     <div className={styles.artistsString}>
                         {artistsString}
                     </div>
-                    <input type='range'></input>
+                    <label>{rank}</label>
+                    <input 
+                        type='range' 
+                        min='0' 
+                        max='10' 
+                        step='1'
+                        name={index}
+                        value={this.state.localPoints}
+                        onChange={this.handlePointsChange}
+                        onMouseUp={this.handleMouseUp}/>
                 </div>
             </div>
             {border ? <hr className={styles.border}/> : null}

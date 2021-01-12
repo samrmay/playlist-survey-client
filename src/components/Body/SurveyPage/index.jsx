@@ -13,6 +13,7 @@ class SurveyPage extends React.Component {
         }
 
         this.fillState = this.fillState.bind(this)
+        this.updatePoints = this.updatePoints.bind(this)
     }
 
     async componentDidMount() {
@@ -46,12 +47,11 @@ class SurveyPage extends React.Component {
         }
     }
 
-    updatePoints(_id, points) {
+    updatePoints(i, points) {
         this.setState(prevState => {
-            const newPoints = prevState.points
-            const i = newPoints.findIndex(item => item._id === _id)
-            newPoints[i].points = points
-            return {points: newPoints}
+            const newTracks = prevState.tracks
+            newTracks[i].points = points
+            return {tracks: newTracks}
         })
     }
 
@@ -69,7 +69,8 @@ class SurveyPage extends React.Component {
                 <SurveyPlaylist 
                     survey={survey}
                     tracks={tracks}
-                    playlist={playlist}/>
+                    playlist={playlist}
+                    updatePoints={this.updatePoints}/>
             </div>
         )
     }

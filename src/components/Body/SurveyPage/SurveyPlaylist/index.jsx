@@ -7,7 +7,7 @@ class SurveyPlaylist extends React.Component {
         super(props)
     }
 
-    generateTrackArr(tracks) {
+    generateTrackArr(tracks, updatePoints) {
         let tracksEntryArr = null
         if (tracks.length > 0) {
             tracksEntryArr = []
@@ -22,7 +22,8 @@ class SurveyPlaylist extends React.Component {
                             index={i} 
                             border={i != (tracks.length-1)}
                             points={trackObj.points}
-                            rank={trackObj.surveyRank}/>
+                            rank={trackObj.surveyRank}
+                            updatePoints={updatePoints}/>
                     )
                 }
             }
@@ -30,13 +31,11 @@ class SurveyPlaylist extends React.Component {
         return tracksEntryArr
     }
 
-    
-
     render() {
         let tracksEntryArr = null
-        const {tracks} = this.props
+        const {tracks, updatePoints} = this.props
         if (tracks) {
-            tracksEntryArr = this.generateTrackArr(tracks)
+            tracksEntryArr = this.generateTrackArr(tracks, updatePoints)
         }
 
         return(
