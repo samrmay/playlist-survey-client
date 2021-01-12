@@ -19,8 +19,14 @@ class TrackEntry extends React.Component {
 
     render() {
         const {track, border} = this.props
+        console.log(track)
         const {name, artists, album} = track
-        const albumLink = album.images[2].url
+
+        let albumLink = '../../../assets/loading.svg'
+        try {
+            albumLink = album.images[2].url
+        } catch {}
+            
         const externalLink = track.external_urls.spotify
         const artistsString = this.stringifyArtists(artists)
 

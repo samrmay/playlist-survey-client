@@ -1,6 +1,5 @@
 .rootContainer {
   background-color: #262626;
-  cursor: move;
   user-select: none;
 }
 .songEntryContainer {
