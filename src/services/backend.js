@@ -65,3 +65,14 @@ export function getPlaylistTracks(id) {
     method: "GET",
   }).then((response) => response.json());
 }
+
+export function putRankings(id, rankings) {
+  const body = {
+    pointsObjs: rankings,
+  };
+
+  return fetch(process.env.API_URL + "survey/" + id + "rankings", {
+    method: "PUT",
+    body,
+  }).then((response) => response.json());
+}
