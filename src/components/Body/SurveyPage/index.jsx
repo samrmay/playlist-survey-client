@@ -27,7 +27,9 @@ class SurveyPage extends React.Component {
             <div>
                 <h3>{survey.name}</h3> 
                 <h5>by: {survey.owner}</h5>
-                <SurveyPlaylist playlistId={survey.playlistSpotifyId}/>
+                <SurveyPlaylist 
+                    playlistId={survey.playlistSpotifyId}
+                    rankings={survey.trackRankings}/>
             </div>
         )
     }
