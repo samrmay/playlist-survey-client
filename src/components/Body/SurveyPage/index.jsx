@@ -1,6 +1,7 @@
 import React from 'react'
 import SurveyPlaylist from './SurveyPlaylist'
-import {getPlaylistById, getPlaylistTracks, getSurveyById} from '../../../services/backend'
+import {getPlaylistById, getPlaylistTracks, getSurveyById, putRankings} from '../../../services/backend'
+import LoadingButton from '../../LoadingButton'
 import styles from './styles.css'
 
 class SurveyPage extends React.Component {
@@ -9,11 +10,13 @@ class SurveyPage extends React.Component {
         this.state = {
             survey: null,
             playlist: null,
-            tracks: null
+            tracks: null,
+            submitted: false
         }
 
         this.fillState = this.fillState.bind(this)
         this.updatePoints = this.updatePoints.bind(this)
+        this.handleSubmit = this.handleSubmit.bind(this)
     }
 
     async componentDidMount() {
@@ -36,7 +39,9 @@ class SurveyPage extends React.Component {
                 
                 for (let i in tracks) {
                     const track = tracks[i]
-                    track.surveyRank = survey.trackRankings.find(item => item.trackSpotifyId == track.track.id).trackRanking
+                    const rankObj = survey.trackRankings.find(item => item.trackSpotifyId == track.track.id)
+                    track.surveyRank = rankObj.trackRanking
+                    track.surveyRankId = rankObj._id
                     track.points = 0
                 }
 
@@ -55,8 +60,19 @@ class SurveyPage extends React.Component {
         })
     }
 
+    async handleSubmit() {
+        this.setState({submitted: true})
+        const {survey, tracks} = this.state
+        const rankings = tracks.map(item => {return {_id: item.surveyRankId, points: item.points}})
+        const response = await putRankings(survey._id, rankings)
+        if (response) {
+            console.log(response)
+            this.setState({submitted: false})
+        }
+    }
+
     render() {
-        const {survey, playlist, tracks} = this.state
+        const {survey, playlist, tracks, submitted} = this.state
         if (!survey) {
             return (
                 <div>loading...</div>
@@ -71,6 +87,11 @@ class SurveyPage extends React.Component {
                     tracks={tracks}
                     playlist={playlist}
                     updatePoints={this.updatePoints}/>
+                <LoadingButton 
+                    content="submit"
+                    width='100px'
+                    handleClick={this.handleSubmit}
+                    wasClicked={submitted} />
             </div>
         )
     }

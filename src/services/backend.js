@@ -71,8 +71,11 @@ export function putRankings(id, rankings) {
     pointsObjs: rankings,
   };
 
-  return fetch(process.env.API_URL + "survey/" + id + "rankings", {
+  return fetch(process.env.API_URL + "survey/" + id + "/rankings", {
     method: "PUT",
-    body,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(body),
   }).then((response) => response.json());
 }
