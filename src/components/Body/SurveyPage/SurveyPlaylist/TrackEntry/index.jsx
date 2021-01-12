@@ -1,4 +1,5 @@
 import React from 'react'
+import Loading from '../../../../../assets/loading.svg'
 import styles from './styles.css'
 
 class TrackEntry extends React.Component {
@@ -19,12 +20,11 @@ class TrackEntry extends React.Component {
 
     render() {
         const {track, border} = this.props
-        console.log(track)
         const {name, artists, album} = track
 
-        let albumLink = '../../../assets/loading.svg'
+        let albumImage = <Loading alt='loading'/>
         try {
-            albumLink = album.images[2].url
+            albumImage = <img src={album.images[2].url} alt='loading' />
         } catch {}
             
         const externalLink = track.external_urls.spotify
@@ -36,7 +36,7 @@ class TrackEntry extends React.Component {
             className={styles.rootContainer}>
             <div className={styles.songEntryContainer}>
                 <div className={styles.coverContainer}>
-                    <a href={externalLink} target='_blank'><img src={albumLink} alt='loading...'/></a>
+                    <a href={externalLink} target='_blank'>{albumImage}</a>
                 </div>
                 <div className={styles.contentContainer}>
                     <div className={styles.songName}>{name}</div>
