@@ -9,7 +9,7 @@ class Body extends React.Component {
     }
 
     render() {
-        const {surveyId, hashPresent} = this.props
+        const {surveyId, hashPresent, checkHash} = this.props
         return(
             <div className={styles.bodyContainer}>
                 {hashPresent 

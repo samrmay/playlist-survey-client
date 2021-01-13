@@ -15,9 +15,14 @@ class App extends React.Component {
             hashPresent: true
         }
         this.handleChange = this.handleChange.bind(this)
+        this.checkHash = this.checkHash.bind(this)
     }
 
     componentDidMount() {
+        this.checkHash()
+    }
+
+    checkHash() {
         if (window.location.hash) {
             const tokenMatch = window.location.hash.match(/access_token=(.+)&token_type/)
             if (tokenMatch && tokenMatch[1]) {
@@ -47,7 +52,8 @@ class App extends React.Component {
                     <Header handleChange={this.handleChange}/>
                     <Body 
                         surveyId={surveyId}
-                        hashPresent={hashPresent}/>
+                        hashPresent={hashPresent}
+                        checkHash={this.checkHash}/>
                 </div>
                 <Footer />
             </div>
