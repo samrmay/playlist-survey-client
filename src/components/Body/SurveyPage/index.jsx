@@ -45,7 +45,7 @@ class SurveyPage extends React.Component {
                     track.points = 0
                 }
 
-                tracks.sort((a, b) => a.surveyRank - b.surveyRank)
+                tracks.sort((a, b) => b.surveyRank - a.surveyRank)
                 this.setState({survey, tracks, playlist})
                 return true
             }
@@ -55,7 +55,7 @@ class SurveyPage extends React.Component {
     updatePoints(i, points) {
         this.setState(prevState => {
             const newTracks = prevState.tracks
-            newTracks[i].points = points
+            newTracks[i].points = parseInt(points)
             return {tracks: newTracks}
         })
     }
