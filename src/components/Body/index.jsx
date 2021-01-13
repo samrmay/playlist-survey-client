@@ -9,11 +9,11 @@ class Body extends React.Component {
     }
 
     render() {
-        const {surveyId} = this.props
+        const {surveyId, hashPresent} = this.props
         return(
             <div className={styles.bodyContainer}>
-                {surveyId 
-                    ? <SurveyPage surveyId={surveyId}/> 
+                {hashPresent 
+                    ? surveyId ? <SurveyPage surveyId={surveyId}/> : <div>loading...</div>
                     : <SurveyFeed />}
             </div>
         )

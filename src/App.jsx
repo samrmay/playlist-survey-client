@@ -11,7 +11,8 @@ class App extends React.Component {
         this.state = {
             showSurveyModal: false,
             userAccessToken: null,
-            surveyId: null
+            surveyId: null,
+            hashPresent: true
         }
         this.handleChange = this.handleChange.bind(this)
     }
@@ -28,6 +29,8 @@ class App extends React.Component {
             if (surveyMatch && surveyMatch[1]) {
                 this.setState({surveyId: surveyMatch[1]})
             }
+        } else {
+            this.setState({hashPresent: false})
         }
     }
 
@@ -36,13 +39,15 @@ class App extends React.Component {
     }
 
     render() {
-        const {showSurveyModal, userAccessToken, surveyId} = this.state
+        const {showSurveyModal, userAccessToken, surveyId, hashPresent} = this.state
         return(
             <div className={styles.root}>
                 {showSurveyModal ? <SurveyModal token={userAccessToken} handleChange={this.handleChange}/> : null}
                 <div>
                     <Header handleChange={this.handleChange}/>
-                    <Body surveyId={surveyId}/>
+                    <Body 
+                        surveyId={surveyId}
+                        hashPresent={hashPresent}/>
                 </div>
                 <Footer />
             </div>

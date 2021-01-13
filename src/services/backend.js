@@ -79,3 +79,9 @@ export function putRankings(id, rankings) {
     body: JSON.stringify(body),
   }).then((response) => response.json());
 }
+
+export function getTopSurveys() {
+  return fetch(process.env.API_URL + "survey/top", {
+    method: "GET",
+  }).then((response) => response.json());
+}
