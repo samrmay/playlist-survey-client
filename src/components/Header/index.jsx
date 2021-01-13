@@ -14,7 +14,9 @@ class Header extends React.Component {
     render() {
         return(
             <div className={styles.headerContainer}>
-                <h2>Playlist Survey App thing</h2>
+                <a href={process.env.REDIRECT_URI} className={styles.headerLink}>
+                    <h2>Playlist Survey App thing</h2>
+                </a>
                 <button onClick={this.handleCreateSurvey} >Create Survey</button>
             </div>
         )

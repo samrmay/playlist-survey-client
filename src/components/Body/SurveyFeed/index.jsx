@@ -33,8 +33,10 @@ class SurveyFeed extends React.Component {
         }
         return(
             <div>
-                Surveys:
-                {surveyElems}
+                <h3>Surveys:</h3>
+                <div className={styles.itemsContainer}>
+                    {surveyElems}
+                </div>
             </div>
         )
     }

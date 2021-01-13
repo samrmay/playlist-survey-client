@@ -1,4 +1,5 @@
 import React from 'react'
+import styles from './styles.css'
 
 class SurveyItem extends React.Component {
     constructor(props) {
@@ -14,7 +15,7 @@ class SurveyItem extends React.Component {
     render() {
         const {survey} = this.props
         return(
-            <div onClick={this.handleClick}>
+            <div onClick={this.handleClick} className={styles.itemContainer}>
                 {survey.name}
             </div>
         )
