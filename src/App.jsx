@@ -3,6 +3,7 @@ import Body from './components/Body'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import SurveyModal from './components/SurveyModal'
+import {getUserToken} from './services/backend'
 import styles from './styles.css'
 
 class App extends React.Component {
@@ -22,21 +23,25 @@ class App extends React.Component {
         this.checkHash()
     }
 
-    checkHash() {
+    async checkHash() {
         if (window.location.hash) {
-            const tokenMatch = window.location.hash.match(/access_token=(.+)&token_type/)
-            if (tokenMatch && tokenMatch[1]) {
-                this.setState({userAccessToken: tokenMatch[1], showSurveyModal: true})
-                return
-            }
-
             const surveyMatch = window.location.hash.match(/surveyid=(.+)/)
             if (surveyMatch && surveyMatch[1]) {
                 this.setState({surveyId: surveyMatch[1]})
             }
         } else {
             this.setState({hashPresent: false})
-        }
+        } 
+
+        if (window.location) {
+            const codeMatch = window.location.search.match(/code=(.+)/)
+            if (codeMatch && codeMatch[1]) {
+                const tokenResponse = await getUserToken(codeMatch[1])
+                const {accessToken, refreshToken} = tokenResponse
+                this.setState({userAccessToken: accessToken, refreshToken, showSurveyModal: true})
+                return
+            }
+        } 
     }
 
     handleChange(name, value) {

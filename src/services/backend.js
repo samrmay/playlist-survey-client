@@ -4,6 +4,12 @@ export function getRedirectURI() {
   }).then((response) => response.json());
 }
 
+export function getUserToken(code) {
+  return fetch(process.env.API_URL + "spotify/user/accesstoken/" + code, {
+    method: "GET",
+  }).then((response) => response.json());
+}
+
 export function getUserInfo(userAccessToken) {
   return fetch(process.env.API_URL + "spotify/user/info/" + userAccessToken, {
     method: "GET",
