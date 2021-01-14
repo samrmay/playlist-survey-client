@@ -49,8 +49,8 @@ class SurveyModal extends React.Component {
     async handleSurveyPost() {
         this.setState({goClicked: true})
         const {selectedId, surveyName} = this.state
-        const {token} = this.props
-        const response = await postSurvey(surveyName, selectedId, token)
+        const {token, refreshToken} = this.props
+        const response = await postSurvey(surveyName, selectedId, token, refreshToken)
         if (response.survey) {
             this.setState({
                 goClicked: false, 

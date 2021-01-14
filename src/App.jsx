@@ -49,10 +49,14 @@ class App extends React.Component {
     }
 
     render() {
-        const {showSurveyModal, userAccessToken, surveyId, hashPresent} = this.state
+        const {showSurveyModal, userAccessToken, surveyId, hashPresent, refreshToken} = this.state
         return(
             <div className={styles.root}>
-                {showSurveyModal ? <SurveyModal token={userAccessToken} handleChange={this.handleChange}/> : null}
+                {showSurveyModal 
+                    ? <SurveyModal 
+                        token={userAccessToken} 
+                        handleChange={this.handleChange}
+                        refreshToken={refreshToken}/> : null}
                 <div>
                     <Header handleChange={this.handleChange}/>
                     <Body 
