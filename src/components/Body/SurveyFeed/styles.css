@@ -1,4 +1,14 @@
+.surveyFeedContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.surveyFeed {
+  width: 75%;
+}
 .itemsContainer {
   padding: 5px;
-  background-color: gray;
+  overflow: auto;
+  height: 500px;
+  border: black 2px solid;
 }

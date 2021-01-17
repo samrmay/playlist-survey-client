@@ -32,10 +32,14 @@ class SurveyFeed extends React.Component {
             surveyElems = this.generateSurveyItems(surveys)
         }
         return(
-            <div>
-                <h3>Surveys:</h3>
-                <div className={styles.itemsContainer}>
-                    {surveyElems}
+            <div className={styles.surveyFeedContainer}>
+                <div className={styles.surveyFeed}>
+                    <div className={styles.headerContainer}>
+                        <h3>Surveys:</h3>
+                    </div>
+                    <div className={styles.itemsContainer}>
+                        {surveyElems}
+                    </div>
                 </div>
             </div>
         )
