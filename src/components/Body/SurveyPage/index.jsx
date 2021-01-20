@@ -65,7 +65,9 @@ class SurveyPage extends React.Component {
         const {survey, tracks} = this.state
         const rankings = tracks.map(item => {return {_id: item.surveyRankId, points: item.points}})
         const response = await putRankings(survey._id, rankings)
-        if (response) {
+        if (response.survey) {
+            const {_id} = response.survey
+            await this.fillState(_id)
             this.setState({submitted: false})
         }
     }
