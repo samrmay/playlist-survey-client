@@ -66,7 +66,6 @@ class SurveyPage extends React.Component {
         const rankings = tracks.map(item => {return {_id: item.surveyRankId, points: item.points}})
         const response = await putRankings(survey._id, rankings)
         if (response) {
-            console.log(response)
             this.setState({submitted: false})
         }
     }
@@ -79,19 +78,21 @@ class SurveyPage extends React.Component {
             )
         }
         return(
-            <div>
-                <h3>{survey.name}</h3> 
-                <h5>by: {survey.owner}</h5>
-                <SurveyPlaylist 
-                    survey={survey}
-                    tracks={tracks}
-                    playlist={playlist}
-                    updatePoints={this.updatePoints}/>
-                <LoadingButton 
-                    content="submit"
-                    width='100px'
-                    handleClick={this.handleSubmit}
-                    wasClicked={submitted} />
+            <div className={styles.surveyPage}>
+                <div className={styles.contentContainer}>
+                    <h3>{survey.name}</h3> 
+                    <h5>by: {survey.owner}</h5>
+                    <SurveyPlaylist 
+                        survey={survey}
+                        tracks={tracks}
+                        playlist={playlist}
+                        updatePoints={this.updatePoints}/>
+                    <LoadingButton 
+                        content="submit"
+                        width='100px'
+                        handleClick={this.handleSubmit}
+                        wasClicked={submitted} />
+                </div>
             </div>
         )
     }
