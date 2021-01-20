@@ -21,7 +21,8 @@ class SurveyFeed extends React.Component {
         return surveys.map((item, i) => {
             return <SurveyItem 
                 survey={item}
-                key={i}/>
+                key={i}
+                border={i!=surveys.length-1}/>
         })
     }
 

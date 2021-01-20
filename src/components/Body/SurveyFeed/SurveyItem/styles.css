@@ -1,4 +1,20 @@
+.rootContainer {
+  background-color: #262626;
+}
 .itemContainer {
   cursor: pointer;
-  padding: 5px;
+  display: flex;
+  background-color: #262626;
+  padding: 15px;
+  color: white;
+}
+.border {
+  border-color: #737373;
+  margin: 0px 5px;
+}
+.surveyName {
+  width: 50%;
+}
+.surveyOwner {
+  width: 50%;
 }
