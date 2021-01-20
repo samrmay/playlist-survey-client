@@ -7,6 +7,10 @@
   background-color: #262626;
   padding: 15px;
   color: white;
+  transition: background-color 0.2s;
+}
+.itemContainer:hover {
+  background-color: #333333;
 }
 .border {
   border-color: #737373;
