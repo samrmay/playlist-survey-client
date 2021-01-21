@@ -9,7 +9,7 @@ class Footer extends React.Component {
     render() {
         return(
             <div className={styles.footerContainer}>
-                WIP! See github: <a>github here once created</a>
+                WIP! See github: <a href='https://github.com/samrmay/playlist-survey-client'>https://github.com/samrmay/playlist-survey-client</a>
             </div>
         )
     }
