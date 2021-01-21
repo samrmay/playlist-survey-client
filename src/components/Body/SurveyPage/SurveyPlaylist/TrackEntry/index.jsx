@@ -39,6 +39,7 @@ class TrackEntry extends React.Component {
     render() {
         const {track, border, index, rank} = this.props
         const {name, artists, album} = track
+        const {localPoints} = this.state
 
         let albumImage = <Loading alt='loading'/>
         try {
@@ -61,14 +62,14 @@ class TrackEntry extends React.Component {
                     <div className={styles.artistsString}>
                         {artistsString}
                     </div>
-                    <label>{rank}</label>
+                    <label>{rank + parseInt(localPoints)}</label>
                     <input 
                         type='range' 
                         min='0' 
                         max='10' 
                         step='1'
                         name={index}
-                        value={this.state.localPoints}
+                        value={localPoints}
                         onChange={this.handlePointsChange}
                         onMouseUp={this.handleMouseUp}/>
                 </div>
